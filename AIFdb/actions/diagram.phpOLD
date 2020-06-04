@@ -1,0 +1,129 @@
+<?php
+
+class DiagramAction extends Action {
+
+    function handle($args) {
+        parent::handle($args);
+
+        if($this->arg('nodesetid')){
+            $nodeset_id = $this->arg('nodesetid');
+            $nodeset = NodeSets::staticGet('nodeSetID', $nodeset_id);
+
+            if (!$nodeset) {
+                $this->no_such_nodeset();
+                return;
+            }
+
+            $output = "digraph nodeset" . $nodeset_id . " {";
+            $output .= "    graph [fontsize=10];";
+            $output .= "    edge  [fontsize=10];";
+            $output .= "    node  [fontsize=10];";
+            $output .= $this->generate_dot($nodeset);
+            $output .= "}";
+
+            if($this->arg('type') == 'svg'){
+                common_template('svg', '', $output, array('nodeset' => $nodeset_id));
+            }else{
+                common_template('png', '', $output, array('nodeset' => $nodeset_id));
+            }
+        }
+    }
+
+    function no_such_nodeset() {
+        common_user_error('No such nodeset');
+    }
+
+    function generate_dot($nodeset) {
+        $plus = false;
+        if($this->arg('plus')){
+            $plus = true;
+        }
+
+        $node = $nodeset->getNodes2();
+        $node->find();
+	
+        $nodes_out = "";
+
+        $edges = array();
+
+        while($node->fetch()){
+            if(!$plus && $node->type != 'I' && $node->type != 'RA' && $node->type != 'CA' && $node->type != 'MA' && $node->type != 'PA'){ continue; }
+            $nodes_out .= $this->show_node($node, $plus);
+            if($node->type != 'I' && $node->type != 'L'){
+                $edges = array_merge($edges, $this->show_edge($node, $plus));
+            }
+        }
+
+        $edges_out = implode(" ", array_unique($edges));
+
+        $dot_out = $nodes_out . $edges_out;
+        return $dot_out;
+    }
+
+    function show_node($node, $plus) {
+        $node_out = ' ';
+        $node_out .= $node->nodeID;
+        $node_out .= ' [label="';
+        if($node->type=="I" || $node->type=="L"){
+            $node_out.= wordwrap(addslashes($node->text), 30, '\n');
+        }else{
+            $s = $node->getScheme();
+            if($s != ""){
+                $node_out.= $s;
+            }else{
+                $node_out.= $node->type;
+            }
+        }
+
+        $node_out .= '", shape="';
+        $node_out .= ($node->type=="I" || $node->type=="L") ? 'box' : 'diamond';
+        $node_out .= '", style=filled, ';
+        if($node->type=="I" || $node->type=="L"){
+            $node_out .= 'fontname="FreeSans", color="#6666cc", fillcolor="#ebf3ff"';
+        }elseif($node->type=="CA"){
+            $node_out .= 'fontname="FreeSans", color="#cc6666", fillcolor="#ffe6e6"';
+        }elseif($node->type=="RA"){
+            $node_out .= 'fontname="FreeSans", color="#66cc66", fillcolor="#e6ffe6"';
+        }elseif($node->type=="MA"){
+            $node_out .= 'fontname="FreeSans", color="#e67e22", fillcolor="#fbeadb"';
+        }elseif($node->type=="PA"){
+            $node_out .= 'fontname="FreeSans", color="#1abc9c", fillcolor="#dcfaf4"';
+        }elseif($node->type=="YA"){
+            $node_out .= 'fontname="FreeSans", color="#cccc66", fillcolor="#ffffe6"';
+        }elseif($node->type=="TA"){
+            $node_out .= 'fontname="FreeSans", color="#cc66cc", fillcolor="#ffe6ff"';
+        }else{
+            $node_out .= 'fontname="FreeSans", color="#cccccc", fillcolor="#eeeeee"';
+        }
+        $node_out .= '];';
+        $node_out .= "";
+        return $node_out;
+    }
+
+    function show_edge($node, $plus) {
+        $edgeTo = $node->getNodesOutInSet($this->arg('nodesetid'));
+        $edgeFrom = $node->getNodesInInSet($this->arg('nodesetid'));
+        $edges = array();
+        while($edgeTo->fetch()){
+            if(!$plus && $edgeTo->type != 'I' && $edgeTo->type != 'RA' && $edgeTo->type != 'CA' && $edgeTo->type != 'MA' && $edgeTo->type != 'PA'){ continue; }
+            $edge_out = '';
+            $edge_out .= $node->nodeID;
+            $edge_out .= ' -> ';
+            $edge_out .= $edgeTo->nodeID;
+            $edge_out .= '[color="#444444"]';
+            $edge_out .= ";";
+            $edges[] = $edge_out;
+        }
+        while($edgeFrom->fetch()){
+            if(!$plus && $edgeFrom->type != 'I' && $edgeFrom->type != 'RA' && $edgeFrom->type != 'CA' && $edgeFrom->type != 'MA' && $edgeFrom->type != 'PA'){ continue; }
+            $edge_out = '';
+            $edge_out .= $edgeFrom->nodeID;
+            $edge_out .= ' -> ';
+            $edge_out .= $node->nodeID;
+            $edge_out .= '[color="#444444"]';
+            $edge_out .= ";";
+            $edges[] = $edge_out;
+        }
+        return $edges;
+    }
+}

@@ -1,0 +1,15 @@
+<?php
+
+$config['site']['name'] = '';
+$config['site']['server'] = '';
+$config['site']['path'] = '';
+
+$config['site']['fancy'] = true;
+
+$db_driver = "mysql";
+$user = "";
+$password = "";
+$host = "localhost";
+$database_name = "";
+
+$config['db']['database'] = "$db_driver://$user:$password@$host/$database_name";

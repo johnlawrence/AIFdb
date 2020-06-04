@@ -1,0 +1,9 @@
+[DB_DataObject]
+
+database          = mysql://ADBUSER:ADBPASS@ADBDBHOST/ADBDB
+schema_location   = ADBCPATH
+class_location    = ADBCPATH
+require_prefix    = classes/
+class_prefix      = 
+db_driver         = MDB2 #Use this if you wish to use MDB2 as the driver
+quote_identifiers = 0

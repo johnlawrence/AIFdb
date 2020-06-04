@@ -1,0 +1,109 @@
+RewriteEngine On
+
+RewriteRule ^search/?$ index.php?action=search [L,QSA]
+
+RewriteRule ^nodes/(\d+)$ index.php?action=nodes&id=$1 [L,QSA]
+RewriteRule ^nodes/to/(\d+)$ index.php?action=nodes&to=$1 [L,QSA]
+RewriteRule ^nodes/from/(\d+)$ index.php?action=nodes&from=$1 [L,QSA]
+RewriteRule ^nodes/search/?$ index.php?action=nodes&search=true [L,QSA]
+RewriteRule ^nodes/?$ index.php?action=nodes [L,QSA]
+
+RewriteRule ^nodeview/(\d+)$ index.php?action=nodeview&node=$1 [L,QSA]
+RewriteRule ^nodeviewlinks/(\d+)$ index.php?action=nodeviewlinks&id=$1 [L,QSA]
+
+RewriteRule ^edges/(\d+)$ index.php?action=edges&id=$1 [L,QSA]
+RewriteRule ^edges/to/(\d+)$ index.php?action=edges&to=$1 [L,QSA]
+RewriteRule ^edges/from/(\d+)$ index.php?action=edges&from=$1 [L,QSA]
+RewriteRule ^edges/?$ index.php?action=edges [L,QSA]
+
+RewriteRule ^schemes/(\d+)$ index.php?action=schemes&id=$1 [L,QSA]
+RewriteRule ^schemes/?$ index.php?action=schemes [L,QSA]
+RewriteRule ^schemes/search/?$ index.php?action=schemes&search=true [L,QSA]
+RewriteRule ^schemes/all/?$ index.php?action=schemes&all=1 [L,QSA]
+
+RewriteRule ^schemefulfillment/(\d+)$ index.php?action=schemefulfillment&id=$1 [L,QSA]
+RewriteRule ^schemefulfillment/?$ index.php?action=schemefulfillment [L,QSA]
+
+RewriteRule ^descriptors/(\d+)$ index.php?action=descriptors&id=$1 [L,QSA]
+RewriteRule ^descriptors/?$ index.php?action=descriptors [L,QSA]
+
+RewriteRule ^descriptorfulfillment/(\d+)$ index.php?action=descriptorfulfillment&id=$1 [L,QSA]
+RewriteRule ^descriptorfulfillment/?$ index.php?action=descriptorfulfillment [L,QSA]
+
+RewriteRule ^formedges/(\d+)$ index.php?action=formedges&id=$1 [L,QSA]
+RewriteRule ^formedges/?$ index.php?action=formedges [L,QSA]
+RewriteRule ^formedges/scheme/(\d+)$ index.php?action=formedges&schemeID=$1 [L,QSA]
+
+RewriteRule ^nodesets/(\d+)$ index.php?action=nodesets&id=$1 [L,QSA]
+RewriteRule ^nodesets/t/(\d+)$ index.php?action=nodesets&id=$1&t=1 [L,QSA]
+RewriteRule ^nodesets/new/?$ index.php?action=nodesets&new=1 [L,QSA]
+RewriteRule ^nodesets/contains/(\d+)$ index.php?action=nodesets&nodeid=$1 [L,QSA]
+RewriteRule ^nodesets/?$ index.php?action=nodesets [L,QSA]
+#RewriteCond %{REQUEST_METHOD}  =GET
+#RewriteRule ^nodesets/merge/?$ static/mergenodesets.php [L,QSA]
+RewriteRule ^nodesets/merge/?$ index.php?action=nodesets&merge=true [L,QSA]
+
+RewriteRule ^nodesetmappings/(\d+)$ index.php?action=nodesetmappings&id=$1 [L,QSA]
+RewriteRule ^nodesetmappings/?$ index.php?action=nodesetmappings [L,QSA]
+
+RewriteRule ^people/(\d+)$ index.php?action=people&id=$1 [L,QSA]
+RewriteRule ^people/?$ index.php?action=people [L,QSA]
+
+RewriteRule ^locutions/(\d+)$ index.php?action=locutions&id=$1 [L,QSA]
+RewriteRule ^locutions/lnode/(\d+)$ index.php?action=locutions&id=$1&bynode=1 [L,QSA]
+RewriteRule ^locutions/nodeset/(\d+)$ index.php?action=locutions&id=$1&bynodeset=1 [L,QSA]
+RewriteRule ^locutions/?$ index.php?action=locutions [L,QSA]
+
+RewriteRule ^lkif/$ index.php?action=lkif [L,QSA]
+RewriteRule ^lkif/(\d+)$ index.php?action=lkif&nodesetid=$1 [L,QSA]
+
+RewriteRule ^rtnl/$ index.php?action=rtnl [L,QSA]
+RewriteRule ^rtnl/(\d+)$ index.php?action=rtnl&nodesetid=$1 [L,QSA]
+
+RewriteRule ^aml/$ index.php?action=aml [L,QSA]
+RewriteRule ^aml/(\d+)$ index.php?action=aml&nodesetid=$1 [L,QSA]
+
+RewriteRule ^rdf/$ index.php?action=rdf [L,QSA]
+RewriteRule ^rdf/(\d+)$ index.php?action=rdf&nodesetid=$1 [L,QSA]
+
+RewriteRule ^dot/(\d+)$ index.php?action=dot&nodesetid=$1&plus=true [L,QSA]
+RewriteRule ^dot/layout/(\d+)$ index.php?action=dot&layout=1&nodesetid=$1 [L,QSA]
+RewriteRule ^dot/simple/(\d+)$ index.php?action=dotsimple&nodesetid=$1&plus=true [L,QSA]
+RewriteRule ^dot/all$ index.php?action=dot&nodesetid=all [L,QSA]
+RewriteRule ^dot/multi/?$ index.php?action=dot&multi=true [L,QSA]
+
+RewriteRule ^graphml/(\d+)$ index.php?action=graphml&nodesetid=$1 [L,QSA]
+RewriteRule ^graphml/multi/?$ index.php?action=graphml&multi=true [L,QSA]
+RewriteRule ^graphmlpluss/(\d+)$ index.php?action=graphmlpluss&nodesetid=$1 [L,QSA]
+RewriteRule ^graphmlpluss/multi/?$ index.php?action=graphmlpluss&multi=true [L,QSA]
+
+RewriteRule ^json/?$ index.php?action=json [L,QSA]
+RewriteRule ^json/(\d+)$ index.php?action=json&nodesetid=$1 [L,QSA]
+RewriteRule ^json/all$ index.php?action=json&nodesetid=all [L,QSA]
+RewriteRule ^json/multi/?$ index.php?action=tjson&multi=true [L,QSA]
+
+RewriteRule ^timestamp/?$ index.php?action=timestamp [L,QSA]
+
+RewriteRule ^jsonst/(\d+)$ index.php?action=jsonst&nodesetid=$1 [L,QSA]
+RewriteRule ^jsonst/all$ index.php?action=jsonst&nodesetid=all [L,QSA]
+
+RewriteRule ^pl/$ index.php?action=prolog [L,QSA]
+RewriteRule ^pl/(\d+)$ index.php?action=prolog&nodesetid=$1 [L,QSA]
+RewriteRule ^pl/([,\d]+)$ index.php?action=prolog&nodesets=$1 [L,QSA]
+RewriteRule ^pl/multi/?$ index.php?action=prolog&multi=true [L,QSA]
+
+RewriteRule ^temp/multi/?$ index.php?action=temp&multi=true [L,QSA]
+RewriteRule ^temp2/multi/?$ index.php?action=temp2&multi=true [L,QSA]
+
+RewriteRule ^plusdiagram/(\d+)$ index.php?action=diagram&type=png&plus=true&nodesetid=$1 [L,QSA]
+
+RewriteRule ^diagram/(\d+)$ index.php?action=diagram&type=png&nodesetid=$1 [L,QSA]
+RewriteRule ^diagram/svg/(\d+)$ index.php?action=diagram&type=svg&nodesetid=$1 [L,QSA]
+RewriteRule ^diagram/svgflip/(\d+)$ index.php?action=diagram&type=svg&flip=true&nodesetid=$1 [L,QSA]
+RewriteRule ^diagram/svgflip/([,\d]+)$ index.php?action=diagram&type=svg&flip=true&nodesets=$1 [L,QSA]
+RewriteRule ^plusdiagram/svgflip/([,\d]+)$ index.php?action=diagram&type=svg&flip=true&plus=true&nodesets=$1 [L,QSA]
+
+RewriteRule ^argview/(\d+)$ index.php?action=argview&nodesetid=$1 [L,QSA]
+RewriteRule ^dialogview/(\d+)$ index.php?action=dialogview&nodesetid=$1 [L,QSA]
+
+RewriteRule ^answer/person/(\d+)$ index.php?action=answer&personID=$1 [L,QSA]

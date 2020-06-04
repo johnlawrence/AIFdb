@@ -1,0 +1,62 @@
+@import url("reset.css");
+
+body {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Helvetica, Arial, sans-serif;
+    font-size: 80%;
+    color: #494949;
+    background-color: #f4f4ed;
+}
+
+h1 {
+    font-size: 1.4em;
+    display: block;
+    border-bottom: 2px solid #557c83;
+    padding: 0px 0px 3px 22px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 8px 0px;
+}
+
+#nav ul { /* remove bullets and list indents */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav ul li a {
+    float: left;
+    display: block;
+    padding: 2px 16px 4px 16px;;
+    color: #557c83;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#nav ul li a:hover {
+    background-color: #e4e4dd;
+}
+
+#allcontent {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#nav {
+    margin: 5px 0px;
+}
+
+#mainbody {
+    padding: 14px 0px;
+    clear: both;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+    width: 220px;
+    vertical-align: middle;
+    padding: 6px 5px;
+}

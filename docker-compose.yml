@@ -1,0 +1,26 @@
+version: '3'
+services:
+ aifdb:
+  container_name: arg-tech-aifdb
+  build: .
+  ports:
+   - "80:80" #change the *left* 80 if you need to bind to a different host port
+  depends_on:
+   - mysql
+  environment:
+   MYSQL_HOST: 'arg-tech-aifdb_mysql'
+   MYSQL_USER: 'root'
+   MYSQL_PASSWORD: '@rgtech'
+
+ mysql:
+  build: ./mysql
+  container_name: arg-tech-aifdb_mysql
+  volumes:
+  - aifdb-mysql-volume:/var/lib/mysql
+  environment:
+   MYSQL_ROOT_PASSWORD: '@rgtech'
+
+volumes:
+ aifdb-mysql-volume:
+  external: false
+  driver: local

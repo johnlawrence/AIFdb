@@ -1,0 +1,86 @@
+/* -- Reset -- */
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+
+/* -- Style -- */
+html, body {
+    font: 12px 'Lucida Grande', Verdana, Arial, sans-serif;
+    font-weight: 400;
+    background-color: #fff;
+    color: #555;
+}
+
+div#ccol {
+    width: 650px;
+    margin : 40px auto;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #666;
+    margin-top: 60px;
+}
+
+input#nsm {
+    padding: 8px 12px;
+    border: 1px solid #aaa;
+    width: 622px;
+    margin: 2px 0px;
+    font-size: 1.4em;
+}
+
+.pure-button {
+    font-family: inherit;
+    font-size: 100%;
+    *font-size: 90%; /*IE 6/7 - To reduce IE's oversized button text*/
+    *overflow: visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
+    padding: 10px 16px;
+    color: #444; /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+    *color: #444; /* IE 6 & 7 */
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 0px;
+}
+
+.pure-button-hover,
+.pure-button:hover,
+.pure-button:focus {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
+    background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+.pure-button:focus {
+    outline: 0;
+}
+.pure-button-active,
+.pure-button:active {
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+}
+
+.pure-button-primary,
+.pure-button-selected,
+a.pure-button-primary,
+a.pure-button-selected {
+    background-color: #009917;
+    color: #fff;
+}
+
+div.participant {
+    border-bottom: 1px solid #d1d5e0;
+    color: #666b7d;
+    line-height: 72px;
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 10px 0px;
+}
+
+div.participant img {
+    margin-right: 20px;
+}

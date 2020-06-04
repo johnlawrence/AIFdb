@@ -1,0 +1,15 @@
+<?php
+
+$config['site']['name'] = 'AIFDB';
+$config['site']['server'] = 'ADBSERVER';
+$config['site']['path'] = 'ADBPATH';
+
+$config['site']['fancy'] = true;
+
+$db_driver = "mysql";
+$user = "ADBUSER";
+$password = "ADBPASS";
+$host = "ADBDBHOST";
+$database_name = "ADBDB";
+
+$config['db']['database'] = "$db_driver://$user:$password@$host/$database_name";

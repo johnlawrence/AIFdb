@@ -1,0 +1,16 @@
+* { margin: 0; padding: 0; }
+
+body {
+    font: 15pt "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif;
+    color: #333;
+}
+
+div#c_box {
+    width: 400px;
+    margin: 100px auto 0 auto;
+}
+
+div#c_box form {
+    background-color: #eef8ff;
+    padding: 20px;
+}
