@@ -36,7 +36,7 @@ class RdfAction extends Action {
 
                 $return = "Imported as nodeSet " . $nodesetId;
                 common_template('clean', '', $return);
-                
+
             }else{
 	            common_user_error('Error uploading file');
             }
@@ -51,7 +51,7 @@ class RdfAction extends Action {
             }
 
             $output = $this->generate_rdf($nodeset);
-
+		$title = '';
 	        common_template('rdf', $title, $output);
 	    }
     }
@@ -108,7 +108,7 @@ class RdfAction extends Action {
             if($node->type =='I'){
                 $in = $node->getNodesIn();
                 while($in->fetch()){
-                    if($in->type == "YA"){ 
+                    if($in->type == "YA"){
                         # floris symmetric relations
                         $node_out .= '        <aif:IllocutionaryContent rdf:resource="&http;www.aifdb.org/nodes/'.$in->nodeID.'"/>'."\n";
                     }elseif($in->type == "RA" || $in->type == "CA"){
@@ -198,18 +198,18 @@ class RdfAction extends Action {
     }
 
     function add_node($node_data) {
-        $props = array("text", "type"); 
+        $props = array("text", "type");
         $node = DB_DataObject::factory('nodes');
         assert($node);
-        
+
         foreach ($node_data as $key => $value){
             if(in_array($key, $props)){
                 $node->$key = $value;
             }
         }
-        $nodeId = $node->insert(); 
+        $nodeId = $node->insert();
 
-        return $nodeId; 
+        return $nodeId;
     }
 
     function add_edge($from, $to) {
@@ -217,7 +217,7 @@ class RdfAction extends Action {
         assert($edge);
         $edge->fromID = $from;
         $edge->toID = $to;
-        $edgeId = $edge->insert(); 
+        $edgeId = $edge->insert();
 
         return $edgeId;
     }

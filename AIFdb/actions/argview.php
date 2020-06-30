@@ -33,7 +33,7 @@ class ArgviewAction extends Action {
     function generate_arg($nodeset, $nodeset_id) {
         $node = $nodeset->getNodes2();
         $nodes_out = "";
-        $dialogue_out = "";
+        $dialog_out = "";
         $show_list = TRUE;
         $node->find();
         $alt = "odd";
@@ -63,7 +63,8 @@ class ArgviewAction extends Action {
     function show_node($node) {
         $node_out = "\n";
         $node_out .= '<h4><span class="nodeID">' . $node->nodeID . '</span></h4>' . "\n";
-        $node_out .= '<p class="text">' . $node->text. '</p>' . "\n";
+	$tx = $node->text;
+        $node_out .= '<p class="text">' . $tx . '</p>' . "\n";
 
         $edgeTo = $node->getNodesOutInSet($this->arg('nodesetid'));
         while($edgeTo->fetch()){
@@ -99,10 +100,14 @@ class ArgviewAction extends Action {
         $locutions->joinAdd($people);
         $locutions->whereAdd("nodes.nodeID='$lnode->nodeID'");
         $l_cnt = $locutions->find();
-        $locutions->fetch();
-        $locution_out .= '<p class="locutor">';
-        $locution_out .= '<a href="' . $locutions->source . '">';
-        $locutor = $locutions->firstName . ' ' . $locutions->surname;
+        $locutor = '';
+        $ldetail = '<a href="#">';
+        while($locutions->fetch()){
+            $ldetail = '<p class="locutor">';
+            $ldetail .= '<a href="' . $locutions->source . '">';
+            $locutor = $locutions->firstName . ' ' . $locutions->surname;
+        }
+        $locution_out .= $ldetail;
         $pos = strpos($locutor, 'tumblr');
         if($pos !== false){
             $pattern = '/.*http:\/\/(.*).tumblr.com.*/';
