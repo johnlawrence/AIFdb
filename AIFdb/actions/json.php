@@ -49,6 +49,8 @@ class JsonAction extends Action {
                     }
                 }
 
+        $this->virtuoso($nodesetId);
+
                 $rdetail = array('nodeSetID' => $nodesetId, 'mappings' => $idmaps, 'partadd' => $p_added);
                 $rdj = json_encode($rdetail);
                 $return = $rdj;// . "Imported as nodeSet " . $nodesetId;
@@ -122,10 +124,10 @@ class JsonAction extends Action {
             assert($node);
             $node->text = $node_text;
             $node->type = $type;
-            $return = $node->insert(); 
+            $return = $node->insert();
         }
 
-        return $return; 
+        return $return;
     }
 
     function add_edge($from, $to) {
@@ -138,7 +140,7 @@ class JsonAction extends Action {
             $edge->fetch();
             $edgeId = $edge->{'edgeID'};
         }else{
-            $edgeId = $edge->insert();  
+            $edgeId = $edge->insert();
         }
 
         return $edgeId;
@@ -173,6 +175,26 @@ class JsonAction extends Action {
         }
 
         return $personID;
+    }
+
+    function virtuoso($nsid) {
+        $url = 'http://tomcat.arg.tech/ArgStructSearch/search/virtuoso/load/';
+
+        // use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => strval($nsid)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) {
+            error_log("ERROR saving to virtuoso instance", 0);
+        }else{
+            error_log("V DONE", 0);
+        }
     }
 
     function add_locution($nodeID, $personID, $start=NULL) {
